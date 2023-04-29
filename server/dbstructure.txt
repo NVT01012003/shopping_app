@@ -1,0 +1,113 @@
+DB: ecomemrces
+
+table: 
+
+- users: 
+	- id: (uuid default uuidv4 primary key)
+	- user_name: (text not null)
+	- type: (varchar default 'purchaser')
+	- is_admin: (boolean)
+	- cart: (uuid default null)
+	- oauth_id: (text default null)
+	- email: (text default null)
+	- phone_number: (int default null)
+	- avatar_url: (text default null)
+    - password: (text default null)
+	- address: (text[] default '{}')
+	- contact_number: (int default null)
+	- timestamp: (timestamp default current_timestamp)
+
+- shops: 
+	- id: (uuid)
+	- owner: (uuid)
+	- products: (numeric defualt 0)
+	- name: (varchar not null)
+	- followers: (numeric default 0)
+	- follows: (numeric default 0)
+	- rating: (numeric default 0)
+	- status: (varchar default 'active')
+	- timestamp: (timestamp default current_timestamp)
+
+- stalls: 
+	- id: (uuid) 
+	- shop: (uuid foreign key shops(id))
+	- products: (uuid[] not null)
+	- type_name: (varchar[] default '{}')
+	- type_product: (varchar[] default '{}')
+	- sold: (int default 0)
+	- rating: (numeric default 0)
+	- min_price: (numeric not null)
+	- max_price: (numeric not null)
+	- sale_off: (numeric default null)
+	- free_shipping_voucher: (boolean default false)
+
+- products: 
+	- id: (uuid)
+	- shops: (uuid foreign key shops(id))
+	- stall: (uuid foreign key stalls(id))
+	- type: (varchar[] not null)
+	- price: (numeric not null)
+	- currency: (varchar default 'VND')
+
+- vouchers: 
+	- id: (uuid)
+	- shops: (uuid foreign key shops(id))
+	- min_price: (numeric default null)
+	- max_price: (numeric defautl null)
+	- sale_off: (numeric not null)
+	- start: (timestamp not null)
+	- expried: (timestamp not null)
+	- timestamp: (timestamp default current_timestamp)
+
+- purchase: 
+	- status: (varchar default 'wait for comfirm')
+	- products: (uuid[] default '{}')
+	- quantity: (int not null)
+	- type: (varchar default 'COD')
+	- order_placed: (timestamp)
+	- order_paid: (timestamp)
+	- payment_info_confirmed: (timestamp)
+	- order_shipped_out: (timestamp)
+	- shipping_process: (timestamp[])
+	- order_received: (timestamp)
+	- order_rated: (timestamp)
+
+- flash_sales: 
+	- id (uuid)
+	- product (uuid foreign key products(id))
+	- start: (timestamp)
+	- end_time: (timestamp)
+	- sale_off: (numeric not null)
+	- number_product (int default not null)
+	- remaining (int not null)
+	- sold: (int default 0)
+
+- feedbacks: 
+	- id: (uuid)
+	- stall: (uuid foreign key stalls(id))
+	- user: (uuid foreign key users(id))
+	- products: (uuid[] foreign key products(id))
+	- rating: (numeric not null)
+	- text: (text default null)
+	- photo: (text[] default '{}')
+
+- carts: 
+    - id: (uuid)
+    - user: (uuid foregin key users(id))
+    - products: (uuid[] foreign key products(id))
+
+- chats: 
+	- id: (uuid)
+	- user: (uuid)
+	- shop: (uuid)
+	- timestamp: (timestamp default current_timestamp)
+
+- messages: 
+	- id: (uuid)
+	- type: (text default 'text')
+	- text: (text default null)
+	- products: (uuid[] default null)
+	- vouchers: (uuid[] default null)
+	- photo: (text default null)
+
+
