@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { v4 as uuidv4, v4 } from "uuid";
 
 dotenv.config();
 const access_token_secret = process.env.ACCESS_TOKEN_SECRET;
@@ -43,4 +44,8 @@ export const comparePassword = (password, hash) => {
     }
     if (!result) throw new Error("Password incorrect");
     else return true;
+};
+
+export const generate_uuid = () => {
+    return v4();
 };

@@ -8,6 +8,7 @@ import {
     generateAccessToken,
     generatePasswordHash,
     generateRefreshToken,
+    generate_uuid,
 } from "../../helpers/algorithms.js";
 
 export const auth = Router();
@@ -20,6 +21,7 @@ auth.post("/register", async (req, res) => {
         credentialValidator.validateRegister({ ...data });
         const hash = generatePasswordHash(password);
         let user = await createUser({
+            id: generate_uuid(),
             user_name,
             email,
             phone_number,

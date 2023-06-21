@@ -2,11 +2,11 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../db/db.js";
 
 export const User = sequelize.define(
-    "users",
+    "user",
     {
         id: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
             primaryKey: true,
         },
         user_name: {
@@ -15,16 +15,6 @@ export const User = sequelize.define(
         },
         type: {
             type: DataTypes.STRING,
-            defaultValue: "purchaser",
-            allowNull: false,
-        },
-        is_admin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-            allowNull: true,
-        },
-        cart: {
-            type: DataTypes.UUID,
             defaultValue: null,
             allowNull: true,
         },
@@ -59,19 +49,9 @@ export const User = sequelize.define(
             defaultValue: null,
             allowNull: true,
         },
-        contact_number: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
-            allowNull: true,
-        },
     },
     {
         indexes: [
-            {
-                name: "idx_user_id",
-                using: "BTREE",
-                fields: ["id"],
-            },
             {
                 name: "idx_email",
                 using: "BTREE",
@@ -84,5 +64,6 @@ export const User = sequelize.define(
             },
         ],
         timestamps: true,
+        createdAt: true,
     }
 );

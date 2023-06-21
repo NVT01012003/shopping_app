@@ -7,6 +7,7 @@ import { handleError } from "../../../helpers/handleError.js";
 import {
     generateAccessToken,
     generateRefreshToken,
+    generate_uuid,
 } from "../../../helpers/algorithms.js";
 
 dotenv.config();
@@ -56,9 +57,12 @@ googleAuthRouter.get("/callback", async (req, res) => {
     try {
         const code = req.query.code;
         const { id, email, name, picture } = await getGoogleUser({ code });
-        const find_user = await findUser({ id, email });
+
+        const find_user = await findUser({ email });
         if (!find_user[0]) {
+            console.log("false");
             var user = await createUser({
+                id: generate_uuid(),
                 auth_id: id,
                 email,
                 user_name: name,

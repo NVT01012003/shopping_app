@@ -2,71 +2,45 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../db/db.js";
 
 export const Shop = sequelize.define(
-    "users",
+    "shop",
     {
         id: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
             primaryKey: true,
         },
-        owner: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+        name: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        products: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-            allowNull: true,
-        },
-        name: {
-            type: DataTypes.TEXT,
+        user_id: {
+            type: DataTypes.UUID,
             allowNull: false,
         },
         followers: {
             type: DataTypes.INTEGER,
             defaultValue: 0,
-            allowNull: false,
         },
-        follows: {
+        following: {
             type: DataTypes.INTEGER,
             defaultValue: 0,
-            allowNull: false,
-        },
-        rating: {
-            type: DataTypes.NUMBER,
-            defaultValue: null,
-            allowNull: true,
-        },
-        status: {
-            type: DataTypes.TEXT,
-            defaultValue: "active",
-            allowNull: false,
         },
     },
     {
         indexes: [
-            {
-                name: "idx_shop_id",
-                using: "BTREE",
-                fields: ["id"],
-            },
-            {
-                name: "idx_shop_owner",
-                using: "BTREE",
-                fields: ["owner"],
-            },
             {
                 name: "idx_shop_name",
                 using: "BTREE",
                 fields: ["name"],
             },
             {
-                name: "idx_shop_status",
+                name: "idx_shop_user_id",
                 using: "BTREE",
-                fields: ["status"],
+                fields: ["user_id"],
             },
         ],
         timestamps: true,
+        createdAt: true,
+        updatedAt: true,
     }
 );

@@ -7,8 +7,9 @@ export const createUser = async (data) => {
 
 export const findUser = async (data) => {
     const user = await User.findAll({
-        oauth_id: data.id,
-        email: data.email,
+        where: {
+            email: data.email,
+        },
     });
     return user;
 };

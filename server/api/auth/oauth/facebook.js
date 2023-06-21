@@ -5,6 +5,7 @@ import { createUser, findUser } from "../../../controllers/user.js";
 import {
     generateAccessToken,
     generateRefreshToken,
+    generate_uuid,
 } from "../../../helpers/algorithms.js";
 import { handleError } from "../../../helpers/handleError.js";
 
@@ -56,9 +57,10 @@ facebookRouter.get("/callback", async (req, res) => {
                 access_token: token.access_token,
             },
         });
-        const find_user = await findUser({ id: data.id, email: data.email });
+        const find_user = await findUser({ email: data.email });
         if (!find_user[0]) {
             var user = await createUser({
+                id: generate_uuid(),
                 auth_id: data.id,
                 email: data.email,
                 user_name: `${data.first_name} ${data.last_name}`,
