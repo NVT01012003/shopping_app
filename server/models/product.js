@@ -26,6 +26,11 @@ export const Product = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        sold: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            allowNull: false,
+        },
         discount_id: {
             type: DataTypes.UUID,
             defaultValue: null,

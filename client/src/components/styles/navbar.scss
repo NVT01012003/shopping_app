@@ -1,0 +1,153 @@
+.navbar-container {
+    width: 100%;
+    padding: 4px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .navbar-logo {
+        display: flex;
+        align-items: center;
+        img {
+            height: 50px;
+            width: auto;
+        }
+        h1 {
+            font-size: 24px;
+            font-family: cursive;
+            color: #8b0d6b;
+        }
+    }
+    .navbar-item {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 500;
+        gap: 24px;
+        &:last-child {
+            padding-left: 30%;
+        }
+        .-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            img {
+                margin-top: 2px;
+                width: 10px;
+                height: 10px;
+            }
+        }
+        .navbar-search_input-wrapper {
+            position: absolute;
+            top: -8px;
+            right: calc(174px + 24px);
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            .search_input-wrapper {
+                align-self: flex-end;
+                display: flex;
+                align-items: center;
+                background-color: #f6f6f6;
+                padding: 6px 20px;
+                border-radius: 20px;
+                width: 260px;
+                transition: all 0.3s ease-in-out;
+                img {
+                    width: 14px;
+                    height: 14px;
+                }
+                .search_input {
+                    padding: 6px 10px;
+                    font-size: 15px;
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+            .popular-categories {
+                display: flex;
+                flex-direction: column;
+                align-self: flex-end;
+                overflow: hidden;
+                background-color: #ffffff;
+                height: 0;
+                width: 0;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+                .popular-categories-title {
+                    width: 100%;
+                    border-bottom: 1px solid #dbdbdb;
+                    padding-bottom: 12px;
+                }
+                .popular-categories-content {
+                    flex-wrap: wrap;
+                    margin-top: 10px;
+                    .popular-categories-item {
+                        height: 48px;
+                        background-color: #efefef;
+                        overflow: hidden;
+                        display: flex;
+                        gap: 8px;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        img {
+                            height: 100%;
+                            padding: 4px;
+                            aspect-ratio: 1 / 1;
+                            object-fit: cover;
+                            object-position: center;
+                        }
+                        div {
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            span {
+                                font-size: 16px;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .search_input-wrapper:has(.search_input:focus) {
+            width: 440px;
+            background-color: #fff;
+            .search_input {
+                background-color: #fff;
+            }
+            & ~ .popular-categories {
+                width: calc(440px - 12px);
+                padding: 20px;
+                height: auto;
+                visibility: visible;
+                opacity: 1;
+                margin-top: 18px;
+            }
+        }
+        .navbar-item-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            .navbar-item-wrapper-tem {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                img {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+}

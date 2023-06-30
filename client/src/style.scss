@@ -1,0 +1,63 @@
+@use "sass:map";
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Signika:wght@300;400;500;600;700&display=swap");
+
+$desktop: 1280px;
+$smallDesktop: 1080px;
+$tablet: 600px;
+$mobile: 360px;
+
+@mixin mobile {
+    @media screen and (max-width: $tablet) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen and (max-width: $smallDesktop) {
+        @content;
+    }
+}
+@mixin laptop {
+    @media screen and (max-width: $desktop) {
+        @content;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    font-family: "Signika", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include laptop {
+        .signup-container {
+            width: 100%;
+        }
+    }
+    @include tablet {
+        .signup-container {
+            .signup-wrapper {
+                height: 84%;
+            }
+        }
+    }
+    @include mobile {
+        .signup-container {
+            .signup-wrapper {
+                width: 100%;
+                height: 100%;
+                .left-item {
+                    display: none;
+                }
+                .right-item {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

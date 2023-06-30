@@ -35,6 +35,10 @@ export const Order_detail = sequelize.define(
             defaultValue: null,
             allowNull: true,
         },
+        payment_method: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         status: {
             type: DataTypes.STRING,
             defaultValue: null,

@@ -1,0 +1,40 @@
+.product_card {
+    flex-shrink: 0;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+    gap: 8px;
+    cursor: pointer;
+    .product_card-image {
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 12px;
+    }
+    .product_card-name {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .product_card-rating {
+        display: flex;
+        gap: 1px;
+        align-items: center;
+        img {
+            width: 14px;
+            height: 14px;
+        }
+        span {
+            margin-left: 6px;
+            font-size: 14px;
+        }
+    }
+    .product_card-price {
+        display: flex;
+        font-size: 16px;
+        span {
+            font-size: 20px;
+        }
+    }
+}

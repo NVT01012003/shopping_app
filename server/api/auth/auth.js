@@ -16,6 +16,7 @@ export const auth = Router();
 auth.post("/register", async (req, res) => {
     try {
         const data = req.body;
+        console.log(data);
         const { user_name, email, phone_number, password, confirm } = data;
         if (!user_name) throw new Error("User name is required");
         credentialValidator.validateRegister({ ...data });
@@ -29,7 +30,10 @@ auth.post("/register", async (req, res) => {
         });
         const refresh_token = generateRefreshToken({ user_name });
         const access_token = generateAccessToken({ user_name, id: user.id });
-        res.cookie("token", `Bearer ${refresh_token}`)
+        res.cookie("token", `Bearer ${refresh_token}`, {
+            httpOnly: true,
+            secure: true,
+        })
             .status(200)
             .json({
                 code: 200,
@@ -39,8 +43,6 @@ auth.post("/register", async (req, res) => {
                         id: user.id,
                         user_name: user.user_name,
                         address: user.address,
-                        contact_number: user.contact_number,
-                        cart: user.cart,
                         type: user.type,
                     },
                     access_token: `Bearer ${access_token}`,
@@ -71,30 +73,14 @@ auth.post("/login", async (req, res) => {
         credentialValidator.validateLogin({ ...data });
         if (email) {
             var user = await User.findAll({
-                attributes: [
-                    "user_name",
-                    "id",
-                    "type",
-                    "cart",
-                    "address",
-                    "contact_number",
-                    "password",
-                ],
+                attributes: ["user_name", "id", "type", "address", "password"],
                 where: {
                     email,
                 },
             });
         } else {
             var user = await User.findOne({
-                attributes: [
-                    "user_name",
-                    "id",
-                    "type",
-                    "cart",
-                    "address",
-                    "contact_number",
-                    "password",
-                ],
+                attributes: ["user_name", "id", "type", "address", "password"],
                 where: {
                     phone_number,
                 },
@@ -108,7 +94,10 @@ auth.post("/login", async (req, res) => {
             user_name: user[0].user_name,
             id: user[0].id,
         });
-        res.cookie("token", `Bearer ${refresh_token}`)
+        res.cookie("token", `Bearer ${refresh_token}`, {
+            httpOnly: true,
+            secure: true,
+        })
             .status(200)
             .json({
                 code: 200,
@@ -118,8 +107,6 @@ auth.post("/login", async (req, res) => {
                         id: user[0].id,
                         user_name: user[0].user_name,
                         address: user[0].address,
-                        contact_number: user[0].contact_number,
-                        cart: user[0].cart,
                         type: user[0].type,
                     },
                     access_token: `Bearer ${access_token}`,

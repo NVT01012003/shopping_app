@@ -1,22 +1,7 @@
 Designing the Database
 
-Static Data: 
-	- product table
-	- discount table
-	- user table
-	- feedback table
 
-Session Data: 
-	- shopping_session table
-	- cart_item table
-
-Processed Data: 
-	- order_details table
-	- order_items table
-	- payment_details table
-
-///// Static Data
-users: 
+user: 
 	- id: uuid not null/ primary key
 	- user_name: text not null
 	- type: text default null
@@ -28,38 +13,56 @@ users:
 	- address: text default null
 	- created_at: time
 
-shops: 
+shop: 
 	- id: uuid not null / primary key
 	- name: string not null
-	- user_id: uuid not null / foreign key users.id
+	- user_id: uuid not null / foreign key user.id
 	- followers: int default 0
 	- following: int default 0
 
-products: 
+stall: 
+	- id: uuid not null / primary key
+	- name: string not null
+	- stall_image: text not null 
+	- shop_id: uuid not null / foreign key shop.id
+	- min_price: double not null
+	- free_shipping: boolean default false
+
+recent_categories:
+	- user_id: uuid not null / foreign key user.id
+	- category: string not null
+	- name: text not null
+	- created_at: time 
+
+
+product: 
 	- id: uuid not null / primary key
 	- name: string not null (index)
 	- desc: text default null
+	- image: text not null
 	- price: decimnal not null
 	- category: string not null
-	- shop_id: uuid not null / foreign key shops.id
+	- classify: string default null
+	- sold: int default 0
+	- shop_id: uuid not null / foreign key shop.id
 	- discount_id: uuid default null / foreign key to discount.id
 	- feedback_id: uuid default null / foreign key to feedback.id
 	- rating: decimal default null
 
-messages: 
+message: 
 	- id: uuid not null
 	- chat: text not null
-	- user_id: uuid not null / foreign key users.id
+	- user_id: uuid not null / foreign key user.id
 	- text: text default null
 	- photo: text default null
 
-feedbacks: 
+feedback: 
 	- id: uuid not null/ primary key
 	- text: text default null
 	- photo: string(999) default null
 	- rating: decimal not null
 
-discounts: 
+discount: 
 	- id: uuid not null/ primary key
 	- type: string not null ['app', 'shop', 'category', 'product']
 	- desc: text default null
@@ -70,41 +73,44 @@ discounts:
 	- time_apply: time not null
 	- time_expried: time not null
 
-my_vouchers: 
-	- user_id: uuid not null / foreign key users.id
-	- discount_id: uuid not null / foreign key discounts.id
+my_voucher: 
+	- user_id: uuid not null / foreign key user.id
+	- discount_id: uuid not null / foreign key discount.id
 	- used: boolean default false
 
-///// Session Data
-
-carts:
+cart:
 	- id: uuid not null
-	- user_id: uuid not null / foreign key users.id
+	- user_id: uuid not null / foreign key user.id
 	- amount: decimal not null
 	- session: boolean deafault true
 
-cart_items: 
-	- cart_id: uuid not null / foreign key carts.id
+cart_item: 
+	- cart_id: uuid not null / foreign key cart.id
 	- product_id: uuid not null
 	- quantity: int not null
 
-///// Processed Data
 
-order_details: 
+order_detail: 
 	- id: uuid not null
-	- user_id: uuid not null / foreign key users.id 
+	- user_id: uuid not null / foreign key user.id 
 	- quantity: int not null 
 	- total: decimal not null
 	- app_voucher: uuid default null
 	- shop_voucher: uuid default null
 	- free_shpping_voucher: uuid default null
+	- payment_method: string not null
 	- status: string [null, 'to pay', 'to ship', 'to receive', 'completed', 'cancelled', 'return refund']
 
-order_items: 
-	- order_id: uuid not null / foreign key order_details.id
-	- product_id: uuid not null / foreign key products.id
+order_item: 
+	- order_id: uuid not null / foreign key order_detail.id
+	- product_id: uuid not null / foreign key product.id
 	- created_at: time
 	- updated_at: time
+
+shipping: 
+	- ship_from: uuid not null
+	- ship_to: uuid not null
+	- phone: string not null
 
 // update later
 payment_details: 

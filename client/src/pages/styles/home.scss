@@ -1,0 +1,362 @@
+.home-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .banner-container {
+        width: 100%;
+        height: 520px;
+        background-color: #fcf0b4;
+        overflow: hidden;
+        display: flex;
+        position: relative;
+        .banner-item {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .banner-arrow {
+            position: absolute;
+            padding: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: calc(50% - 18px);
+            display: none;
+            animation: display_arrow 0.5s linear;
+            img {
+                width: 20px;
+                height: auto;
+                filter: invert(100%);
+            }
+        }
+        .banner-arrow.arrow-next {
+            right: 0;
+        }
+        &:hover {
+            .banner-arrow {
+                display: block;
+            }
+        }
+    }
+    .content-container {
+        padding: 0 10%;
+        margin-top: 40px;
+        margin-bottom: 80px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .content-category-wrapper {
+            .content-category {
+                width: auto;
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                .content-category_item-wrapper {
+                    position: relative;
+                    aspect-ratio: 3 / 4;
+                    flex-shrink: 0;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    margin-bottom: 30px;
+                    .content-category_item {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                    span {
+                        position: absolute;
+                        font-size: 24px;
+                        font-weight: 600;
+                        width: 100%;
+                        color: #fff;
+                        top: 20%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .products-wrapper {
+            .products {
+                width: 100%;
+                overflow-x: scroll;
+            }
+        }
+        .content-brands-wrapper {
+            .content-brands {
+                flex-wrap: wrap;
+                height: 180px;
+                .brand_card-wrapper {
+                    margin-bottom: 16px;
+                    display: flex;
+                    gap: 10px;
+                    background-color: #f5f5f5;
+                    padding: 16px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                        justify-content: center;
+                        .brand_card-name {
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        .brand_card-desc {
+                            font-size: 14px;
+                            color: #444444;
+                        }
+                    }
+                }
+            }
+        }
+        .content-big_sales-wrapper {
+            .content-big_sales {
+                width: 100%;
+                overflow: hidden;
+                .saleoff_card-wrapper {
+                    background-color: #f7f7f7;
+                    flex-shrink: 0;
+                    display: flex;
+                    flex-direction: column;
+                    aspect-ratio: 2 / 3;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    .saleoff_card-save_desc-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                        padding: 20px;
+                        height: 50%;
+                        width: 100%;
+                        .saleoff_card-save {
+                            font-size: 20px;
+                            display: block;
+                            font-weight: 600;
+                            span {
+                                display: flex;
+                                font-size: 28px;
+                                span {
+                                    font-size: 40px;
+                                }
+                            }
+                        }
+                        .saleoff_card-desc {
+                            font-size: 16px;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden;
+                        }
+                    }
+                    .saleoff_card-image-wrapper {
+                        width: 100%;
+                        height: 50%;
+                        overflow: hidden;
+                        .saleoff_card-image {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            object-position: center;
+                            transition: all 0.2s ease-in-out;
+                        }
+                    }
+                    &:hover {
+                        .saleoff_card-image {
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+        }
+        .brand-wrapper {
+            width: 100%;
+            height: 280px;
+            background-color: #fecdb9;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .brand-image {
+                height: 100%;
+            }
+            .brand-content_wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                h1 {
+                    font-size: 42px;
+                    color: #8b0d6b;
+                }
+                span {
+                    font-size: 18px;
+                    color: #8b0d6b;
+                    font-weight: 500;
+                }
+                button {
+                    background-color: #8b0d6b;
+                    border: none;
+                    padding: 14px 24px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 18px;
+                    border-radius: 22px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+        .trending_products-wrapper {
+            .trending_products {
+                .trending_product_card-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    aspect-ratio: 5 / 4;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    img {
+                        height: 65%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                    .trending_product_card-content {
+                        height: 35%;
+                        background-color: #f7f7f7;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 12px;
+                        padding: 4%;
+                        h3 {
+                            font-size: 20px;
+                            font-weight: 500;
+                        }
+                        div {
+                            button {
+                                background-color: #000;
+                                color: #fff;
+                                padding: 10px 20px;
+                                border: none;
+                                line-height: 16px;
+                                border-radius: 20px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .best_selling_stores-wrapper {
+            .best_selling_stores {
+                .store_card-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    aspect-ratio: 3 / 4;
+                    overflow: hidden;
+                    border-radius: 12px;
+                    position: relative;
+                    cursor: pointer;
+                    .store_card-img {
+                        width: 100%;
+                        height: 65%;
+                        object-fit: cover;
+                        object-position: center;
+                        border-radius: 12px;
+                    }
+                    .store_card-content-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        padding-left: 16px;
+                        padding-top: 30px;
+                        height: 35%;
+                        gap: 4px;
+                        h4 {
+                            font-size: 18px;
+                            font-weight: 600;
+                        }
+                        span {
+                            font-size: 15px;
+                            color: rgb(255, 84, 84);
+                        }
+                        .store_card-desc {
+                            color: #a3a3a3;
+                            font-weight: 300;
+                            font-size: 14px;
+                        }
+                    }
+                    .store_card-logo-wrapper {
+                        position: absolute;
+                        left: 16px;
+                        top: calc(65% - 30px);
+                        width: 50px;
+                        height: 50px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        .store_card-logo {
+                            width: 100%;
+                            height: 100%;
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+        }
+        .services_to_help-wrapper {
+            .services_to_help {
+                .service_help_card-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    aspect-ratio: 4 / 5;
+                    background-color: #f6f6f6;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    div {
+                        height: 48%;
+                        display: flex;
+                        padding: 8%;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        h2 {
+                            font-weight: 500;
+                            font-size: 32px;
+                            max-width: 240px;
+                        }
+                        span {
+                            font-size: 18px;
+                            max-width: 240px;
+                            color: #1a1a1a;
+                            font-weight: 400;
+                        }
+                    }
+                    img {
+                        height: 52%;
+                        width: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+            }
+        }
+    }
+    .title {
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+    .title_content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

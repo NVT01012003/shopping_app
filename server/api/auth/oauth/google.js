@@ -76,7 +76,10 @@ googleAuthRouter.get("/callback", async (req, res) => {
             user_name: name,
             id: user.id,
         });
-        res.cookie("token", refresh_token)
+        res.cookie("token", refresh_token, {
+            httpOnly: true,
+            secure: true,
+        })
             .status(200)
             .json({
                 code: 200,
@@ -87,8 +90,6 @@ googleAuthRouter.get("/callback", async (req, res) => {
                         id: user.id,
                         user_name: user.user_name,
                         address: user.address,
-                        contact_number: user.contact_number,
-                        cart: user.cart,
                         type: user.type,
                         avatar_url: user.avatar_url,
                     },

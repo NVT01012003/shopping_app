@@ -1,0 +1,14 @@
+page list
+
+- signup page
+- signin page
+- home page
+- what't new page
+- searched page 
+- single product page
+- order page
+- payment page
+- voucher page
+- shop page
+- category page
+- chat box

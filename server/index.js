@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import { router } from "./api/index.js";
 import { sequelize } from "./db/db.js";
@@ -9,10 +10,18 @@ import { sequelize } from "./db/db.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5050;
+const client_host = process.env.CLIENT_HOST;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(
+    cors({
+        origin: client_host,
+        credentials: true,
+    })
+);
+
 app.use("/api", router);
 app.get("/", (req, res) => {
     res.send("Welcome!");
